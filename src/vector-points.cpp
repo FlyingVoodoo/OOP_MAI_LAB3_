@@ -1,5 +1,6 @@
 #include "vector-points.h"
-#include <algorithm>
+
+#include <stdexcept>
 
 VectorPoints::VectorPoints() 
     : size(0), capacity(1), v(new Point[capacity]) {}
@@ -35,14 +36,19 @@ void VectorPoints::push(Point c) {
 }
 
 void VectorPoints::pop() {
-  if (size) {
-    --size;
+  if (size == 0) {
+    throw std::out_of_range("Cannot pop from empty VectorPoints");
   }
+  --size;
 }
 
 void VectorPoints::set(size_t i, Point p) { v[i] = p; }
 
 Point VectorPoints::get(size_t i) const { return v[i]; }
+
+Point& VectorPoints::operator[](size_t i) { return v[i]; }
+
+const Point& VectorPoints::operator[](size_t i) const { return v[i]; }
 
 size_t VectorPoints::len() const { return size; }
 

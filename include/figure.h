@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+
 #include "vector-points.h"
 
 class Figure {
@@ -13,9 +14,10 @@ public:
     friend bool operator!=(const Figure&, const Figure&);
 protected:
     Figure();
-    VectorPoints v;
-    long double CalcArea(const VectorPoints&) const;
-    Point CalcCenter(const VectorPoints&) const;
+    Figure(size_t pointsCount);
+    VectorPoints points;
+    static long double CalcArea(const VectorPoints&);
+    static Point CalcCenter(const VectorPoints&);
     
 };
 std::istream& operator>>(std::istream&, Figure&);

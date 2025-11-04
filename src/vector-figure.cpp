@@ -1,6 +1,8 @@
 #include "vector-figure.h"
 #include "figure.h"
 
+#include <stdexcept>
+
 VectorFigure::VectorFigure() : size(0), capacity(1), v(new Figure*[capacity]) {}
 
 VectorFigure::VectorFigure(const VectorFigure& other)
@@ -25,7 +27,9 @@ void VectorFigure::resize(size_t newsize) {
 }
 
 void VectorFigure::erase(size_t index) {
-    if (index >= size) return;
+    if (index >= size) {
+        throw std::out_of_range("Index out of range in VectorFigure::erase");
+    }
 
     delete v[index];
 
@@ -43,12 +47,15 @@ void VectorFigure::push(Figure* c) {
 }
 
 void VectorFigure::pop() {
-  if (size) {
-    --size;
+  if (size == 0) {
+    throw std::out_of_range("Cannot pop from empty VectorFigure");
   }
+  --size;
 }
 
 Figure* VectorFigure::get(size_t i) { return v[i]; }
+
+Figure*& VectorFigure::operator[](size_t i) { return v[i]; }
 
 size_t VectorFigure::len() { return size; }
 

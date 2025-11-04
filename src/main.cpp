@@ -1,10 +1,11 @@
 #include <iostream>
-#include <figure.h>
 #include <ostream>
-#include <rectangle.h>
-#include <rhombus.h>
-#include <trapezoid.h>
-#include <vector-figure.h>
+
+#include "figure.h"
+#include "rectangle.h"
+#include "rhombus.h"
+#include "trapezoid.h"
+#include "vector-figure.h"
 
 int main() {
     VectorFigure v;

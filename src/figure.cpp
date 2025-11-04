@@ -1,9 +1,10 @@
-#include<figure.h>
-#include <cmath>
+#include <figure.h>
 
 Figure::Figure() {}
 
-long double Figure::CalcArea(const VectorPoints& t) const {
+Figure::Figure(size_t pointsCount) : points(pointsCount) {}
+
+long double Figure::CalcArea(const VectorPoints& t) {
     long double res{0.0};
     for (size_t i = 0; i + 1 < t.len(); ++i) {
         res += (long long)t.get(i).x * (long long)t.get(i + 1).y;
@@ -14,9 +15,9 @@ long double Figure::CalcArea(const VectorPoints& t) const {
     return std::abs(res / 2.0L);
 }
 
-long double Figure::Area() { return CalcArea(v); }
+long double Figure::Area() { return CalcArea(points); }
 
-Point Figure::CalcCenter(const VectorPoints& t) const {
+Point Figure::CalcCenter(const VectorPoints& t) {
     int x = 0, y = 0;
     for (size_t i = 0; i < t.len(); ++i) {
         x += t.get(i).x;
@@ -26,17 +27,14 @@ Point Figure::CalcCenter(const VectorPoints& t) const {
 }
 
 void Figure::ReadPoints(std::istream& is) {
-    for (size_t i = 0; i < v.len(); ++i) {
-        Point p;
-        is >> p.x >> p.y;
-        v.set(i, p);
+    for (size_t i = 0; i < points.len(); ++i) {
+        is >> points[i];
     }
 }
 
 void Figure::PrintPoints(std::ostream& os) const {
-    for (size_t i = 0; i < v.len(); ++i) {
-        Point p = v.get(i);
-        os << "( " << p.x << ", " << p.y << ")";
+    for (size_t i = 0; i < points.len(); ++i) {
+        os << points[i];
     }
 }
 
@@ -51,11 +49,11 @@ std::ostream& operator<<(std::ostream& os, const Figure& f) {
 }
 
 bool operator==(const Figure& a, const Figure& b) {
-  if (a.v.len() != b.v.len()) {
+  if (a.points.len() != b.points.len()) {
     return false;
   }
-  for (size_t i = 0; i < a.v.len(); ++i) {
-    if (a.v.get(i) != b.v.get(i)) {
+  for (size_t i = 0; i < a.points.len(); ++i) {
+    if (a.points.get(i) != b.points.get(i)) {
       return false;
     }
   }

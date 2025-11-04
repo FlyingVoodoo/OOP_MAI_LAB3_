@@ -15,6 +15,7 @@ public:
   void erase(size_t);
 
   Figure* get(size_t);
+  Figure*& operator[](size_t);
   
   size_t len();
 

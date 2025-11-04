@@ -15,6 +15,8 @@ public:
   void resize(size_t sz);
 
   Point get(size_t) const;
+  Point& operator[](size_t);
+  const Point& operator[](size_t) const;
 
   size_t len() const;
 
