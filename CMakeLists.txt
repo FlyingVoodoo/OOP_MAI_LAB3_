@@ -26,7 +26,7 @@ set(LIB_SOURCES
     src/trapezoid.cpp
 )
 
-add_executable(geometry_figures ${MAIN_SOURCE} ${LIB_SOURCES} ${HEADERS})
+add_executable(geometry_figures ${MAIN_SOURCE} ${LIB_SOURCES})
 target_include_directories(geometry_figures PRIVATE include)
 target_compile_features(geometry_figures PRIVATE cxx_std_20)
 
